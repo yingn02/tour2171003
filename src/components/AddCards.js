@@ -11,7 +11,7 @@ const AddCards = function ({ bdata }) {
         cardInfo = bdata.response.body.items.item;
     } 
     else {
-        console.log("데이터 로딩중");
+        //console.log("데이터 로딩중");
     }
 
     return (

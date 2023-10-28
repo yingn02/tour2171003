@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import AddRegionWeather from './AddRegionWeather';
+import { wait } from '@testing-library/user-event/dist/utils';
 //jSLG7PhndCZp9dBtSCY5UGFS4dLgXrtHWCe4JURn1K7VE7UDXwRv9xyHgez0UaGVP8L9%2Bv22bAKf9Uy%2BPWrFeQ%3D%3D
 //jSLG7PhndCZp9dBtSCY5UGFS4dLgXrtHWCe4JURn1K7VE7UDXwRv9xyHgez0UaGVP8L9+v22bAKf9Uy+PWrFeQ==
 
@@ -14,10 +15,11 @@ const AddWeather = function ({ cdata }) {
   //console.log(""+year+month+date);
 
   if (cdata && cdata.response && cdata.response.body && cdata.response.body.items && cdata.response.body.items.item) {
-    x = cdata.response.body.items.item[0].mapx;
-    y = cdata.response.body.items.item[0].mapy;
-    oldr = cdata.response.body.items.item[0].addr1;
-    for(i=0; i<oldr.length; i++) { //ㅇㅇ시 ㅇㅇ동 ... -> ㅇㅇ시 ㅇㅇ동
+    x = cdata.response.body.items.item[1].mapx;
+    y = cdata.response.body.items.item[1].mapy;
+    oldr = cdata.response.body.items.item[1].addr1;
+    
+    for(i=0; i<oldr.length; i++) { //ㅇㅇ시 ㅇㅇ동 ... ... -> ㅇㅇ시 ㅇㅇ동
       if(oldr[i] === " ") {
         r += (oldr[i]);
         n++;
@@ -28,7 +30,7 @@ const AddWeather = function ({ cdata }) {
     //console.log(r);
   }
   else {
-    console.log("데이터 로딩중");
+    //console.log("데이터 로딩중");
   }
 
   /////기상청에서 제공한 GPS -> GRID 좌표변환 코드 (시작)/////
@@ -93,7 +95,7 @@ const AddWeather = function ({ cdata }) {
       .catch((error) => {
         console.error("데이터 가져오기 오류 발생:", error);
       });
-  }, [cdata]);
+  }, [data]);
 
 
 

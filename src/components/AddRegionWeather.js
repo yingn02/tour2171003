@@ -5,13 +5,14 @@ const AddRegionWeather = function ({ region, wdata }) {
     if (wdata && wdata.response && wdata.response.body && wdata.response.body.items && wdata.response.body.items.item) {
         weatherInfo = wdata.response.body.items.item;
         //console.log(weatherInfo[0].fcstValue);
-
+    
         let daySky; //오전날씨
         let dayTmp = weatherInfo[36].fcstValue; //오전 기온
         let nightSky = weatherInfo[145 + 5].fcstValue; //오후날씨
         let nightTmp = weatherInfo[145].fcstValue; //오후 기온
         let dayImg; //오전 날씨 아이콘
         let nightImg; //오후 날씨 아이콘
+    
 
         //기본 날씨 (오전)
         if (weatherInfo[36 + 5].fcstValue == 1) daySky = "맑음";
@@ -91,12 +92,8 @@ const AddRegionWeather = function ({ region, wdata }) {
 
     }
     else {
-        console.log("데이터 로딩중");
+        //console.log("데이터 로딩중");
     }
-
-
-
-
 }
 
 export default AddRegionWeather;

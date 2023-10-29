@@ -23,7 +23,7 @@ const AddNews = function ({ cdata }) {
 
     useEffect(() => {
         let url = `https://dapi.kakao.com/v2/search/web?sort=accuracy&page=1&size=10&query=${r}+%EB%89%B4%EC%8A%A4`;
-
+        
         fetch(url, {
             headers: {
                 Authorization: "KakaoAK 42aea0a9544189e3bed25b9e54036aea"

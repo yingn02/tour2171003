@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import AddRegionWeather from './AddRegionWeather';
-import { wait } from '@testing-library/user-event/dist/utils';
 //jSLG7PhndCZp9dBtSCY5UGFS4dLgXrtHWCe4JURn1K7VE7UDXwRv9xyHgez0UaGVP8L9%2Bv22bAKf9Uy%2BPWrFeQ%3D%3D
 //jSLG7PhndCZp9dBtSCY5UGFS4dLgXrtHWCe4JURn1K7VE7UDXwRv9xyHgez0UaGVP8L9+v22bAKf9Uy+PWrFeQ==
 
@@ -80,7 +79,7 @@ const AddWeather = function ({ cdata }) {
   }
   /////기상청에서 제공한 GPS -> GRID 좌표변환 코드 (끝)/////
   useEffect(() => {
-    let url = `https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst?serviceKey=jSLG7PhndCZp9dBtSCY5UGFS4dLgXrtHWCe4JURn1K7VE7UDXwRv9xyHgez0UaGVP8L9%2Bv22bAKf9Uy%2BPWrFeQ%3D%3D&pageNo=1&numOfRows=1000&dataType=JSON&base_date=${""+year+month+date-1}&base_time=0500&nx=${rs.x}&ny=${rs.y}`;
+    let url = `https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst?serviceKey=jSLG7PhndCZp9dBtSCY5UGFS4dLgXrtHWCe4JURn1K7VE7UDXwRv9xyHgez0UaGVP8L9%2Bv22bAKf9Uy%2BPWrFeQ%3D%3D&pageNo=1&numOfRows=160&dataType=JSON&base_date=${""+year+month+date-1}&base_time=0500&nx=${rs.x}&ny=${rs.y}`;
 
     fetch(url)
       .then((response) => {
@@ -101,6 +100,7 @@ const AddWeather = function ({ cdata }) {
 
   return (
     <>
+      <h4>날씨정보</h4>
       <AddRegionWeather region={r} wdata={data} />
     </>
   );

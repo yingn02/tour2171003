@@ -6,7 +6,6 @@ import AddMap from "./components/AddMap";
 import AddWeather from './components/AddWeather';
 import AddNews from './components/AddNews';
 import AddBottomBar from './components/AddBottomBar';
-//import DataFetching from './components/DataFetching';
 
 function App() {
     //const [searchQuery, setSearchQuery] = useState('');

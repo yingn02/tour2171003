@@ -43,7 +43,7 @@ function AddSearchBox({ selectedType, selectedRegion, onDataFetched }) {
                 onDataFetched(data);
             })
             .catch((error) => {
-                console.error("데이터 가져오기 오류 발생:", error);
+                console.error("데이터 가져오기 오류(AddSearchBox):", error);
             });
 
     }, [searchQuery, selectedType, selectedRegion]);

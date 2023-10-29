@@ -1,7 +1,8 @@
-//https://blog.zarathu.com/posts/2023-02-15-searchapi-with-python/
 import React, { useState, useEffect } from 'react';
+
 const AddNews = function ({ cdata }) {
     const [data, setData] = useState(null); //data 저장
+
     var i, n = 0;
     let oldr, r = "";
 
@@ -11,7 +12,7 @@ const AddNews = function ({ cdata }) {
             if (oldr[i] === " ") {
                 r += (oldr[i]);
                 n++;
-                if (n >= 2) break;
+                if (n >= 1) break;
             }
             else r += (oldr[i]);
         }
@@ -22,34 +23,46 @@ const AddNews = function ({ cdata }) {
     }
 
     useEffect(() => {
-        let url = `https://dapi.kakao.com/v2/search/web?sort=accuracy&page=1&size=10&query=${r}+%EB%89%B4%EC%8A%A4`;
-        
+        let url = `/v1/search/news.json?query=${r}&display=10&start=1&sort=sim`;
+
         fetch(url, {
             headers: {
-                Authorization: "KakaoAK 42aea0a9544189e3bed25b9e54036aea"
+                "X-Naver-Client-Id": "E_E3qYAz_RU8Cgal2wDM",
+                "X-Naver-Client-Secret": "pcDLWEldn2"
             }
         })
             .then((response) => {
                 if (!response.ok) {
                     throw new Error("응답이 없음");
                 }
-                return response.json(); // JSON으로 파싱된 데이터를 반환
+                return response.json();
             })
             .then((data) => {
-                //여기에 JSON 데이터를 사용하거나 처리
-                //console.log(data.documents);
+                //console.log(data);
                 setData(data);
             })
             .catch((error) => {
-                console.error("데이터 가져오기 오류 발생:", error);
+                console.error("데이터 가져오기 오류(AddNews):", error);
             });
-    }, [data])
+    }, [cdata])
 
 
     return (
         <>
-            <h4>관련뉴스</h4>
-            {data && data.documents.map((news, i) => <p style={{ fontSize: "12px" }} key={i}>{news.title.replace(/<\/?b>/g, '')}</p>)}
+            
+            <div style={{ border: '2px solid skyblue', padding: '10px'}}>
+                <h4 style={{margin: '0px'}}>관련뉴스</h4>
+                    {data &&
+                        data.items.map((news, i) => (
+                            <p
+                                style={{ fontSize: "10px", color:"blue", cursor: "pointer"}}
+                                key={i}
+                                onClick={() => { window.open(news.link, 'NewWindow', 'width=600, height=400') }}
+                            >
+                                {news.title.replace(/<\/?b>/g, '')}
+                            </p>
+                        ))}
+            </div>
 
         </>
     );

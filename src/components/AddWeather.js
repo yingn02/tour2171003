@@ -6,12 +6,11 @@ import AddRegionWeather from './AddRegionWeather';
 const AddWeather = function ({ cdata }) {
   const [data, setData] = useState();
   var i, n=0;
-  let x, y, oldr, r="";
-  let today = new Date();
-  let year = today.getFullYear(); // 년도
-  let month = today.getMonth() + 1;  // 월
-  let date = today.getDate();  // 날짜
-  //console.log(""+year+month+date);
+  var x, y, oldr, r="";
+  var today = new Date();
+  var year = today.getFullYear(); // 년도
+  var month = today.getMonth() + 1;  // 월
+  var date = today.getDate();  // 날짜
 
   if (cdata && cdata.response && cdata.response.body && cdata.response.body.items && cdata.response.body.items.item) {
     x = cdata.response.body.items.item[1].mapx;
@@ -79,7 +78,7 @@ const AddWeather = function ({ cdata }) {
   }
   /////기상청에서 제공한 GPS -> GRID 좌표변환 코드 (끝)/////
   useEffect(() => {
-    let url = `https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst?serviceKey=jSLG7PhndCZp9dBtSCY5UGFS4dLgXrtHWCe4JURn1K7VE7UDXwRv9xyHgez0UaGVP8L9%2Bv22bAKf9Uy%2BPWrFeQ%3D%3D&pageNo=1&numOfRows=160&dataType=JSON&base_date=${""+year+month+date-1}&base_time=0500&nx=${rs.x}&ny=${rs.y}`;
+    let url = `https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst?serviceKey=jSLG7PhndCZp9dBtSCY5UGFS4dLgXrtHWCe4JURn1K7VE7UDXwRv9xyHgez0UaGVP8L9%2Bv22bAKf9Uy%2BPWrFeQ%3D%3D&pageNo=1&numOfRows=160&dataType=JSON&base_date=${""+year+month+date-1}&base_time=0600&nx=${rs.x}&ny=${rs.y}`;
 
     fetch(url)
       .then((response) => {
@@ -92,7 +91,7 @@ const AddWeather = function ({ cdata }) {
         setData(data);
       })
       .catch((error) => {
-        console.error("데이터 가져오기 오류 발생:", error);
+        console.error("데이터 가져오기 오류(AddWeather):", error);
       });
   }, [data]);
 
@@ -100,7 +99,6 @@ const AddWeather = function ({ cdata }) {
 
   return (
     <>
-      <h4>날씨정보</h4>
       <AddRegionWeather region={r} wdata={data} />
     </>
   );

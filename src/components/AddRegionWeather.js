@@ -1,5 +1,6 @@
 import React from 'react';
 const AddRegionWeather = function ({ region, wdata }) {
+    //console.log(region);
     let weatherInfo = [];
 
     if (wdata && wdata.response && wdata.response.body && wdata.response.body.items && wdata.response.body.items.item) {

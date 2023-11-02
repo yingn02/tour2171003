@@ -1,5 +1,5 @@
 import AddCard from './AddCard';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Row, Col, Card } from 'antd';
 //const { Meta } = Card;
 

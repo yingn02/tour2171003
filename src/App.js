@@ -35,20 +35,22 @@ function App() {
             <br />
             <div style={{ display: 'flex' }}>
                 <div>
-                    <AddMap />
+                    <AddMap/>
                 </div>
                 &emsp;
                 <div>
                     <div>
                         <AddWeather cdata={data} />
                     </div>
-                    <br />
+                    <br/>
                     <div>
                         <AddNews cdata={data} />
                     </div>
                 </div>
             </div>
-            <br />
+            <br/>
+            <br/>
+            <br/>
             <AddBottomBar cdata={data} />
         </>
     );

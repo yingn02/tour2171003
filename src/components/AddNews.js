@@ -4,25 +4,36 @@ const AddNews = function ({ cdata }) {
     const [data, setData] = useState(null); //data 저장
 
     var i, n = 0;
-    let oldr, r = "";
-
-    if (cdata && cdata.response && cdata.response.body && cdata.response.body.items && cdata.response.body.items.item) {
-        oldr = cdata.response.body.items.item[1].addr1;
-        for (i = 0; i < oldr.length; i++) { //ㅇㅇ시 ㅇㅇ동 ... -> ㅇㅇ시 ㅇㅇ동
-            if (oldr[i] === " ") {
-                r += (oldr[i]);
-                n++;
-                if (n >= 1) break;
-            }
-            else r += (oldr[i]);
-        }
-        //console.log(r);
-    }
-    else {
-        //console.log("데이터 로딩중");
-    }
+    let oldr;
 
     useEffect(() => {
+        if (cdata && cdata.response && cdata.response.body && cdata.response.body.items && cdata.response.body.items.item) {
+            for (i = 0; i < cdata.response.body.items.item.length; i++) {
+                if (cdata.response.body.items.item[i].addr1) {
+                    oldr = cdata.response.body.items.item[i].addr1;
+                    break; // 데이터를 찾았으면 반복을 멈춤
+                } else {
+                    console.log("데이터 로딩중");
+                }
+            }
+
+            var r = "";
+            oldr = cdata.response.body.items.item[i].addr1;
+            for (i = 0; i < oldr.length; i++) { //ㅇㅇ시 ㅇㅇ동 ... -> ㅇㅇ시 ㅇㅇ동
+                if (oldr[i] === " ") {
+                    r += (oldr[i]);
+                    n++;
+                    if (n >= 1) break;
+                }
+                else r += (oldr[i]);
+            }
+            //console.log(r);
+        }
+        else {
+            //console.log("데이터 로딩중");
+        }
+
+        //useEffect(() => {
         let url = `/v1/search/news.json?query=${r}&display=10&start=1&sort=sim`;
 
         fetch(url, {
@@ -49,19 +60,20 @@ const AddNews = function ({ cdata }) {
 
     return (
         <>
-            
-            <div style={{ border: '2px solid skyblue', padding: '10px'}}>
-                <h4 style={{margin: '0px'}}>관련뉴스</h4>
-                    {data &&
-                        data.items.map((news, i) => (
-                            <p
-                                style={{ fontSize: "10px", color:"blue", cursor: "pointer"}}
-                                key={i}
-                                onClick={() => { window.open(news.link, 'NewWindow', 'width=600, height=400') }}
-                            >
-                                {news.title.replace(/<\/?b>/g, '')}
-                            </p>
-                        ))}
+
+            <div style={{ border: '2px solid skyblue', padding: '10px' }}>
+                <h4 style={{ margin: '0px' }}>관련뉴스</h4>
+                {data &&
+                    data.items.map((news, i) => (
+                        <p
+                            style={{ fontSize: "10px", color: "blue", cursor: "pointer" }}
+                            key={i}
+                            onClick={() => { window.open(news.link, 'NewWindow', 'width=600, height=400') }}
+                        >
+                            {news.title.replace(/<\/?b>|&quot;|&gt;/g, '')}
+                            
+                        </p>
+                    ))}
             </div>
 
         </>

@@ -1,3 +1,4 @@
+# <컴포넌트2/> 는 무시
 # npm install antd
 # npm install http-proxy-middleware --save
 # ----------------------------------------

@@ -1,10 +1,12 @@
 //b73a4fe0c5a5ea4d6e973fc7822b8bc9
 import React, { useEffect } from "react";
 import '../styles/AddMap.css';
+//import MapScript from './MapScript';
 const { kakao } = window;
 
-const AddMap = function () {
+export const AddMap2 = () => {
     useEffect(() => {
+
         // 마커를 클릭했을 때 해당 장소의 상세정보를 보여줄 커스텀오버레이입니다
         var placeOverlay = new kakao.maps.CustomOverlay({ zIndex: 1 }),
             contentNode = document.createElement('div'), // 커스텀 오버레이의 컨텐츠 엘리먼트 입니다 
@@ -197,7 +199,7 @@ const AddMap = function () {
             }
         }
 
-        ////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////컨트롤러 시작
 
         // 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
         var mapTypeControl = new kakao.maps.MapTypeControl();
@@ -210,8 +212,7 @@ const AddMap = function () {
         var zoomControl = new kakao.maps.ZoomControl();
         map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
 
-        ////////////////////////////////////////////////////////////////////////////////////
-
+        ////////////////////////////////////////////////////////////////////////////////////로드뷰 시작
         var overlayOn = false, // 지도 위에 로드뷰 오버레이가 추가된 상태를 가지고 있을 변수
             container = document.getElementById('container'), // 지도와 로드뷰를 감싸고 있는 div 입니다
             mapWrapper = document.getElementById('mapWrapper'), // 지도를 감싸고 있는 div 입니다
@@ -223,9 +224,6 @@ const AddMap = function () {
                 center: mapCenter, // 지도의 중심좌표
                 level: 3 // 지도의 확대 레벨
             };
-
-        // 지도를 표시할 div와 지도 옵션으로 지도를 생성합니다
-        var map = new kakao.maps.Map(mapContainer, mapOption);
 
         // 로드뷰 객체를 생성합니다 
         var rv = new kakao.maps.Roadview(rvContainer);
@@ -343,7 +341,7 @@ const AddMap = function () {
             }
         }
 
-        //지도 위의 로드뷰 도로 오버레이를 추가,제거하는 함수입니다
+        // 지도 위의 로드뷰 도로 오버레이를 추가,제거하는 함수입니다
         function toggleOverlay(active) {
             if (active) {
                 overlayOn = true;
@@ -370,7 +368,7 @@ const AddMap = function () {
             }
         }
 
-        //지도 위의 로드뷰 버튼을 눌렀을 때 호출되는 함수입니다
+        // 지도 위의 로드뷰 버튼을 눌렀을 때 호출되는 함수입니다
         function setRoadviewRoad() {
             var control = document.getElementById('roadviewControl');
 
@@ -395,53 +393,52 @@ const AddMap = function () {
         }
 
 
+
     }, []);
 
     return (
         <>
             <p style={{ marginTop: "-12px" }}>
             </p>
-            <div id="container" className="map_wrap">
+            <div id="container">
                 <div id="rvWrapper">
-                    <div id="roadview" style={{ width: "100%", height: "100%" }}></div>
-                    <div id="close" title="로드뷰닫기" onclick="closeRoadview()"><span class="img"></span></div>
+                    <div id="roadview" style={{width:"100%", height:"100%"}}></div>
+                    <div id="close" title="로드뷰닫기" onclick={closeRoadview()}><span class="img"></span></div>
                 </div>
-                <div id="mapWrapper">
+                <div id="mapWrapper" className="map_wrap">
                     <div id="map" style={{ width: '700px', height: '400px', position: 'relative', overflow: 'hidden' }}></div>
                     <div id="roadviewControl" onclick={setRoadviewRoad()}></div>
+                    <ul id="category">
+                        <li id="FD6" data-order="0">
+                            <span className="category_bg bank"></span>
+                            음식점
+                        </li>
+                        <li id="MT1" data-order="1">
+                            <span className="category_bg mart"></span>
+                            대형마트
+                        </li>
+                        <li id="SC4" data-order="2">
+                            <span className="category_bg pharmacy"></span>
+                            학교
+                        </li>
+                        <li id="SW8" data-order="3">
+                            <span className="category_bg oil"></span>
+                            지하철역
+                        </li>
+                        <li id="CE7" data-order="4">
+                            <span className="category_bg cafe"></span>
+                            카페
+                        </li>
+                        <li id="CS2" data-order="5">
+                            <span className="category_bg store"></span>
+                            편의점
+                        </li>
+                    </ul>
                 </div>
-
-
-                <ul id="category">
-                    <li id="FD6" data-order="0">
-                        <span className="category_bg bank"></span>
-                        음식점
-                    </li>
-                    <li id="MT1" data-order="1">
-                        <span className="category_bg mart"></span>
-                        대형마트
-                    </li>
-                    <li id="SC4" data-order="2">
-                        <span className="category_bg pharmacy"></span>
-                        학교
-                    </li>
-                    <li id="SW8" data-order="3">
-                        <span className="category_bg oil"></span>
-                        지하철역
-                    </li>
-                    <li id="CE7" data-order="4">
-                        <span className="category_bg cafe"></span>
-                        카페
-                    </li>
-                    <li id="CS2" data-order="5">
-                        <span className="category_bg store"></span>
-                        편의점
-                    </li>
-                </ul>
             </div>
         </>
     );
 
 }
 
-export default AddMap;
+export default AddMap2;

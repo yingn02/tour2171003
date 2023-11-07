@@ -1,12 +1,12 @@
 //b73a4fe0c5a5ea4d6e973fc7822b8bc9
 import React, { useEffect } from "react";
 import '../styles/AddMap.css';
-//import MapScript from './MapScript';
 const { kakao } = window;
 
-const AddMap = function () {
+export const AddMap = () => {
     
     useEffect(() => {
+        
         // 마커를 클릭했을 때 해당 장소의 상세정보를 보여줄 커스텀오버레이입니다
         var placeOverlay = new kakao.maps.CustomOverlay({ zIndex: 1 }),
             contentNode = document.createElement('div'), // 커스텀 오버레이의 컨텐츠 엘리먼트 입니다 
@@ -198,24 +198,6 @@ const AddMap = function () {
                 el.className = 'on';
             }
         }
-
-        ////////////////////////////////////////////////////////////////////////////////////
-
-        // 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
-        var mapTypeControl = new kakao.maps.MapTypeControl();
-
-        // 지도에 컨트롤을 추가해야 지도위에 표시됩니다
-        // kakao.maps.ControlPosition은 컨트롤이 표시될 위치를 정의하는데 TOPRIGHT는 오른쪽 위를 의미합니다
-        map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
-
-        // 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
-        var zoomControl = new kakao.maps.ZoomControl();
-        map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
-
-        ////////////////////////////////////////////////////////////////////////////////////
-
-      
-
 
     }, []);
 

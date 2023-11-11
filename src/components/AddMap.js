@@ -88,8 +88,6 @@ export const AddMap = () => {
             // 이 순서는 스프라이트 이미지에서의 위치를 계산하는데 사용됩니다
             var order = document.getElementById(currCategory).getAttribute('data-order');
 
-
-
             for (var i = 0; i < places.length; i++) {
 
                 // 마커를 생성하고 지도에 표시합니다

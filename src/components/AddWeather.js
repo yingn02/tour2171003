@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import AddRegionWeather from './AddRegionWeather';
-//jSLG7PhndCZp9dBtSCY5UGFS4dLgXrtHWCe4JURn1K7VE7UDXwRv9xyHgez0UaGVP8L9%2Bv22bAKf9Uy%2BPWrFeQ%3D%3D
-//jSLG7PhndCZp9dBtSCY5UGFS4dLgXrtHWCe4JURn1K7VE7UDXwRv9xyHgez0UaGVP8L9+v22bAKf9Uy+PWrFeQ==
 
 const AddWeather = function ({ cdata }) {
   const [data, setData] = useState(null);
@@ -30,7 +28,6 @@ const AddWeather = function ({ cdata }) {
     }
 
     newToday = "" + year + month + date;
-    //console.log(newToday);
 
     if (cdata && cdata.response && cdata.response.body && cdata.response.body.items && cdata.response.body.items.item) {
       for (i = 0; i < cdata.response.body.items.item.length; i++) {
@@ -40,11 +37,12 @@ const AddWeather = function ({ cdata }) {
           oldr = cdata.response.body.items.item[i].addr1;
           break; // 데이터를 찾았으면 반복을 멈춤
         } else {
-          //console.log("데이터 로딩중");
+          
         }
       }
 
       r = "";
+
       for (i = 0; i < oldr.length; i++) { //ㅇㅇ시 ㅇㅇ동 ... ... -> ㅇㅇ시 ㅇㅇ동
         if (oldr[i] === " ") {
           r += (oldr[i]);
@@ -53,10 +51,11 @@ const AddWeather = function ({ cdata }) {
         }
         else r += (oldr[i]);
       }
-      console.log(r);
     }
     else {
-      //console.log("데이터 로딩중");
+      x = 126.9717664185;
+      y = 37.5545416306;
+      r = "서울특별시 중구";
     }
 
     /////기상청에서 제공한 GPS -> GRID 좌표변환 코드 (시작)/////
@@ -70,7 +69,6 @@ const AddWeather = function ({ cdata }) {
     var YO = 136; // 기준점 Y좌표(GRID)
 
     var rs = dfs_xy_conv("toXY", y, x);
-    //console.log(rs.x, rs.y);
 
     function dfs_xy_conv(code, v1, v2) {
       var DEGRAD = Math.PI / 180.0;
@@ -105,7 +103,7 @@ const AddWeather = function ({ cdata }) {
       return rs;
     }
     /////기상청에서 제공한 GPS -> GRID 좌표변환 코드 (끝)/////
-    //useEffect(() => {
+
     let url = `https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst?serviceKey=jSLG7PhndCZp9dBtSCY5UGFS4dLgXrtHWCe4JURn1K7VE7UDXwRv9xyHgez0UaGVP8L9%2Bv22bAKf9Uy%2BPWrFeQ%3D%3D&pageNo=1&numOfRows=160&dataType=JSON&base_date=${newToday}&base_time=0500&nx=${rs.x}&ny=${rs.y}`;
 
     fetch(url)
@@ -117,14 +115,13 @@ const AddWeather = function ({ cdata }) {
       })
       .then((data) => {
         setData(data);
-        console.log(data);//
       })
       .catch((error) => {
         console.error("데이터 가져오기 오류(AddWeather):", error);
       });
 
       setR(r);
-  }, [cdata]);
+  }, [cdata, r]);
 
 
 

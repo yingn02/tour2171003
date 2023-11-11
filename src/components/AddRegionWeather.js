@@ -1,11 +1,9 @@
 import React from 'react';
 const AddRegionWeather = function ({ region, wdata }) {
-    //console.log(region);
     let weatherInfo = [];
 
     if (wdata && wdata.response && wdata.response.body && wdata.response.body.items && wdata.response.body.items.item) {
         weatherInfo = wdata.response.body.items.item;
-        //console.log(weatherInfo[0].fcstValue);
     
         let daySky; //오전날씨
         let dayTmp = weatherInfo[36].fcstValue; //오전 기온
@@ -55,8 +53,6 @@ const AddRegionWeather = function ({ region, wdata }) {
         else if (nightSky == "눈") nightImg = "img/눈.jpg";
         else if (nightSky == "소나기") nightImg = "img/비.jpg";
 
-        //console.log(dayImg);
-
         return (
             <>
                 <div>
@@ -93,7 +89,7 @@ const AddRegionWeather = function ({ region, wdata }) {
 
     }
     else {
-        //console.log("데이터 로딩중");
+
     }
 }
 

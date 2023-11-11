@@ -3,14 +3,13 @@ import React, { useState, useEffect, useMemo } from 'react';
 function AddSearchBox({ selectedType, selectedRegion, onDataFetched }) {
     const [searchQuery, setSearchQuery] = useState('');
     const [shouldSearch, setShouldSearch] = useState(false);
-
+    
     const handleSearch = () => {
-        //setSearchQuery(searchQuery); // 검색어를 부모 컴포넌트로 전달
         setShouldSearch(true);
     };
 
     useEffect(() => {
-            let url;
+        let url;
 
             if (searchQuery && selectedType && selectedRegion) { //전부 입력
                 url =
@@ -30,7 +29,8 @@ function AddSearchBox({ selectedType, selectedRegion, onDataFetched }) {
             }
             else {
                 url =
-                    `https://apis.data.go.kr/B551011/KorService1/searchKeyword1?numOfRows=100&MobileOS=WIN&MobileApp=App&_type=json&keyword=%EB%B0%95%EB%AC%BC%EA%B4%80&serviceKey=jSLG7PhndCZp9dBtSCY5UGFS4dLgXrtHWCe4JURn1K7VE7UDXwRv9xyHgez0UaGVP8L9%2Bv22bAKf9Uy%2BPWrFeQ%3D%3D`;
+                    `https://apis.data.go.kr/B551011/KorService1/searchKeyword1?numOfRows=100&MobileOS=WIN&MobileApp=App&_type=json&keyword=%EC%84%9C%EC%9A%B8&serviceKey=jSLG7PhndCZp9dBtSCY5UGFS4dLgXrtHWCe4JURn1K7VE7UDXwRv9xyHgez0UaGVP8L9%2Bv22bAKf9Uy%2BPWrFeQ%3D%3D`;
+                
             }
 
             fetch(url)
@@ -41,12 +41,11 @@ function AddSearchBox({ selectedType, selectedRegion, onDataFetched }) {
                     return response.json();
                 })
                 .then((data) => {
-                    //console.log(data);
                     onDataFetched(data);
                 })
                 .catch((error) => {
                     console.error("데이터 가져오기 오류(AddSearchBox):", error);
-                });
+                })
 
             setShouldSearch(false);
         

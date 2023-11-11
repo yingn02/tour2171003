@@ -13,10 +13,6 @@ const AddBottomBar = ({ cdata }) => {
     setOpen(false);
   };
 
-  // const onChange = (e) => {
-  //   setPlacement(e.target.value);
-  // };
-
   return (
     <>
       <Space>

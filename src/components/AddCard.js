@@ -12,7 +12,6 @@ const AddCard = function ({ data, name, address, image }) {
     const openModal = (card) => {
         setSelectedCard(card);
         setIsModalOpen(true);
-        //console.log(card);
     };
 
     //모달 닫기

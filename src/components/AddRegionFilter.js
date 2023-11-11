@@ -3,7 +3,6 @@ import { Select } from 'antd';
 
 const AddRegionFilter = function ({ onSelect }) {
   const onChange = (value) => {
-    //console.log(`selected ${value}`);
     onSelect(value); // 선택된 값을 부모 컴포넌트로 전달
   };
   

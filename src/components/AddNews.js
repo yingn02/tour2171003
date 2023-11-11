@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 const AddNews = function ({ cdata }) {
     const [data, setData] = useState(null); //data 저장
-
+    let [r, setR] = useState(""); // r 상태값 추가
     var i, n = 0;
     let oldr;
 
@@ -17,8 +17,8 @@ const AddNews = function ({ cdata }) {
                 }
             }
 
-            var r = "";
-            oldr = cdata.response.body.items.item[i].addr1;
+            r = "";
+            
             for (i = 0; i < oldr.length; i++) { //ㅇㅇ시 ㅇㅇ동 ... -> ㅇㅇ시 ㅇㅇ동
                 if (oldr[i] === " ") {
                     r += (oldr[i]);
@@ -27,13 +27,12 @@ const AddNews = function ({ cdata }) {
                 }
                 else r += (oldr[i]);
             }
-            //console.log(r);
+            
         }
         else {
-            //console.log("데이터 로딩중");
+            r = "서울특별시";
         }
 
-        //useEffect(() => {
         let url = `/v1/search/news.json?query=${r}&display=10&start=1&sort=sim`;
 
         fetch(url, {
@@ -49,13 +48,14 @@ const AddNews = function ({ cdata }) {
                 return response.json();
             })
             .then((data) => {
-                //console.log(data);
                 setData(data);
             })
             .catch((error) => {
                 console.error("데이터 가져오기 오류(AddNews):", error);
             });
-    }, [cdata])
+
+            setR(r);
+    }, [cdata, r])
 
 
     return (

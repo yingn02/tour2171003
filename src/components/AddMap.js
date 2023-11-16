@@ -102,7 +102,7 @@ export const AddMap = () => {
 
         // 마커를 생성하고 지도 위에 마커를 표시하는 함수입니다
         function addMarker(position, order) {
-            var imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_category.png', // 마커 이미지 url, 스프라이트 이미지를 씁니다
+            var imageSrc = "./img/category_icons.png", // 마커 이미지 url, 스프라이트 이미지를 씁니다
                 imageSize = new kakao.maps.Size(27, 28),  // 마커 이미지의 크기
                 imgOptions = {
                     spriteSize: new kakao.maps.Size(72, 208), // 스프라이트 이미지의 크기
@@ -205,7 +205,7 @@ export const AddMap = () => {
 
                 <ul id="category">
                     <li id="FD6" data-order="0">
-                        <span className="category_bg bank"></span>
+                        <span className="category_bg food"></span>
                         음식점
                     </li>
                     <li id="MT1" data-order="1">
@@ -213,11 +213,11 @@ export const AddMap = () => {
                         대형마트
                     </li>
                     <li id="SC4" data-order="2">
-                        <span className="category_bg pharmacy"></span>
+                        <span className="category_bg school"></span>
                         학교
                     </li>
                     <li id="SW8" data-order="3">
-                        <span className="category_bg oil"></span>
+                        <span className="category_bg subway"></span>
                         지하철역
                     </li>
                     <li id="CE7" data-order="4">
